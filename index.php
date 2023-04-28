@@ -58,7 +58,7 @@ require_once 'inc/conn.php';
                         </div>
                         <div class="col">
                             <div class="p-1">
-                                <input class="form-control" type="date" />
+                                <input class="form-control" type="date"/>
                             </div>
                         </div>
                         <div class="col">
@@ -155,7 +155,7 @@ require_once 'inc/conn.php';
 
 
 
-    <script>
+    <!-- <script>
         const checkboxes = document.querySelectorAll('.btn-check');
         const selectedItemsDiv = document.querySelector('#selected-items');
 
@@ -174,7 +174,7 @@ require_once 'inc/conn.php';
                 }
             });
         });
-    </script>
+    </script> -->
 
 
 
