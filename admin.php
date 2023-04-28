@@ -58,7 +58,7 @@ require_once 'inc/conn.php';
                         </div>
                         <div class="col">
                             <div class="p-1">
-                                <input class="form-control" type="date"/>
+                                <input class="form-control" type="date" />
                             </div>
                         </div>
                         <div class="col">
@@ -69,13 +69,25 @@ require_once 'inc/conn.php';
                     </form>
                 </div>
                 <div class="d-flex">
-                    <a href="admin.php">Admin</a>
+                    <a href="index.php">Agent</a>
                 </div>
             </div>
 
         </div>
     </nav>
 
+    <!-- Trip Action Section -->
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#tripAddModal">
+                    Trip Add
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- All Trip Section -->
     <div class="container">
         <?php
 
@@ -119,17 +131,86 @@ require_once 'inc/conn.php';
     </div>
 
 
-    <!-- Modal -->
+    <!-- Modal For Seat Plane -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content" id="modal-content">
 
-                
+
 
             </div>
         </div>
     </div>
 
+    <!-- Modal For Add New Trip -->
+
+    <div class="modal fade" id="tripAddModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">New Trip Add</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <select class="form-select mr-4" name="coach_no" aria-label="Default select example">
+                                <option selected>Coach No</option>
+                                <option value="101">101</option>
+                                <option value="105">105</option>
+                                <option value="110">110</option>
+                                <option value="115">115</option>
+                                <option value="210">210</option>
+                                <option value="215">215</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <select class="form-select" name="route" required>
+                                <option selected>Route</option>
+                                <option value="Dhaka - Gopalganj - Khulna">Dhaka - Gopalganj - Khulna</option>
+                                <option value="Dhaka - Gopalganj - Pirojpur">Dhaka - Gopalganj - Pirojpur</option>
+                                <option value="Dhaka - Gopalganj - Kotalipara">Dhaka - Gopalganj - Kotalipara</option>
+                                <option value="Dhaka - Vatiyapara - Narail">Dhaka - Vatiyapara - Narail</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <select name="deposit_category" class="form-select" required onchange="changeValue()">
+                                <option value="" selected>Select Fees Category</option>
+                                <option value="Semester Fees" data-value="8500">Semester Fees</option>
+                                <option value="Tuition Fees" data-value="12000">Tuition Fees</option>
+                                <option value="Form Fill-Up Fees" data-value="2500">Form Fill-Up Fees</option>
+                                <option value="Mid Term Fees" data-value="600">Mid Term Fees</option>
+                                <option value="Referred Exam Fees" data-value="800">Referred Exam Fees</option>
+                                <option value="Others" data-value="0">Others</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <input type="number" name="deposit_amount" id="deposit_amount" value="" class="form-control"
+                                required>
+                        </div>
+                        <!-- <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Message:</label>
+                            <textarea class="form-control" id="message-text"></textarea>
+                        </div> -->
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Send message</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- Script -->
 
 
     <script>
@@ -149,6 +230,14 @@ require_once 'inc/conn.php';
                 });
             });
         });
+
+
+
+        function changeValue() {
+            var dropdown = document.getElementsByName("deposit_category")[0];
+            var inputBox = document.getElementById("deposit_amount");
+            inputBox.value = dropdown.options[dropdown.selectedIndex].getAttribute("data-value");
+        }
 
     </script>
 
