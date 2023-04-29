@@ -1,12 +1,12 @@
 <?php
 
 // Set the timezone to Bangladesh
-date_default_timezone_set("Asia/Dhaka");
+date_default_timezone_set( "Asia/Dhaka" );
 
 require_once 'inc/conn.php';
 
 
-if (isset($_POST['submit_trip'])) {
+if (isset( $_POST['submit_trip'] )) {
 
     $coach_no = $_POST['coach_no'];
     $route = $_POST['route'];
@@ -16,20 +16,21 @@ if (isset($_POST['submit_trip'])) {
 
     // Generate a random number
     do {
-        $random_num = rand(1000, 99999);
+        $random_num = rand( 1000, 99999 );
         $query = "SELECT id FROM trip_status WHERE id = '$random_num'";
-        $result = mysqli_query($con, $query);
-    } while (mysqli_num_rows($result) > 0);
+        $result = mysqli_query( $con, $query );
+    } while (mysqli_num_rows( $result ) > 0);
 
     // Insert data into the database
     $sql = "INSERT INTO trip_status (id, coach_no, date, time, route, station) VALUES ('$random_num', '$coach_no', '$date', '$time', '$route', '$station')";
-    $result = mysqli_query($con, $sql);
+    $result = mysqli_query( $con, $sql );
 
     if ($result) {
         echo "<script>alert('Added a New Trip Successfully');
         window.location.href = 'admin.php';
         </script>";
-    } else {
+    }
+    else {
         echo "Query error!";
     }
 
@@ -122,13 +123,13 @@ if (isset($_POST['submit_trip'])) {
     </div>
 
     <!-- All Trip Section -->
-    <div class="container">
+    <div class="">
         <?php
 
         $sql = "SELECT * FROM `trip_status` ORDER BY s_no ASC";
-        $result = mysqli_query($con, $sql);
+        $result = mysqli_query( $con, $sql );
 
-        if (mysqli_num_rows($result) > 0) {
+        if (mysqli_num_rows( $result ) > 0) {
 
             echo '
             <table class="table table-hover">
@@ -139,30 +140,47 @@ if (isset($_POST['submit_trip'])) {
                         <th scope="col">Route</th>
                         <th scope="col">Action</th>
                         <th scope="col">Action</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
-                <tbody>';
-            while ($row = mysqli_fetch_assoc($result)) {
+            <tbody>';
+            while ($row = mysqli_fetch_assoc( $result )) {
                 echo '
                     <tr>
-                        <td>' . $row['coach_no'] . '</td>
-                        <td>' . $row['time'] . '</td>
-                        <td>' . $row['route'] . '</td>
-                        <td>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="' . $row['id'] . '">
+                        <td class="text-success fw-bold">' . $row['coach_no'] . '</td>
+                        <td class="text-success fw-bold">' . $row['time'] . '</td>
+                        <td class="text-success fw-bold">' . $row['route'] . '</td>
+                        <td>';
+
+                if ($row['status'] == 1) {
+                    echo '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="' . $row['id'] . '">
                                 Book
-                            </button>
-                        </td>
+                            </button>';
+                }
+                else {
+                    echo '<button type="button" class="btn btn-danger" disabled>
+                                    Book
+                                </button>';
+                }
+
+                echo '</td>
                         <td>
-                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#tripOmit" data-id="' . $row['id'] . '">
-                            Omit
-                        </button>
+                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#tripOmit" data-id="' . $row['id'] . '">
+                                Omit
+                            </button>
+                        </td>';
+                echo '<td>
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#tripActive" data-id="' . $row['id'] . '">
+                                Active
+                            </button>
                         </td>
                     </tr>';
             }
+
             echo '</tbody></table>';
 
-        } else {
+        }
+        else {
             echo 'Data not found in the database';
         }
 
@@ -185,6 +203,18 @@ if (isset($_POST['submit_trip'])) {
     <div class="modal fade" id="tripOmit" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content" id="trip-omit">
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal For Trip Active -->
+    <div class="modal fade" id="tripActive" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" id="trip-active">
 
 
 
@@ -253,7 +283,7 @@ if (isset($_POST['submit_trip'])) {
                             <input type="text" name="station" id="station" value="" class="form-control" readonly>
                         </div>
                         <div class="mb-3">
-                            <input name="date" type="date" class="form-control" value="<?php echo date('Y-m-d'); ?>"
+                            <input name="date" type="date" class="form-control" value="<?php echo date( 'Y-m-d' ); ?>"
                                 required />
                         </div>
                         <div class="mb-3">
@@ -287,6 +317,8 @@ if (isset($_POST['submit_trip'])) {
 
 
     <script>
+
+        // Seat Plan Modal
         $(document).ready(function () {
             $('#exampleModal').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget);
@@ -304,6 +336,7 @@ if (isset($_POST['submit_trip'])) {
             });
         });
 
+        // Trip Omit Modal
         $(document).ready(function () {
             $('#tripOmit').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget);
@@ -316,6 +349,24 @@ if (isset($_POST['submit_trip'])) {
                     success: function (response) {
                         // Display the fetched data in the modal
                         modal.find('#trip-omit').html(response);
+                    }
+                });
+            });
+        });
+
+        // Trip Active Modal
+        $(document).ready(function () {
+            $('#tripActive').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var id = button.data('id');
+                var modal = $(this);
+                $.ajax({
+                    type: "GET",
+                    url: "trip_active.php",
+                    data: { id: id },
+                    success: function (response) {
+                        // Display the fetched data in the modal
+                        modal.find('#trip-active').html(response);
                     }
                 });
             });

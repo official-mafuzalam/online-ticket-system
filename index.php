@@ -58,7 +58,7 @@ require_once 'inc/conn.php';
                         </div>
                         <div class="col">
                             <div class="p-1">
-                                <input class="form-control" type="date"/>
+                                <input class="form-control" type="date" />
                             </div>
                         </div>
                         <div class="col">
@@ -76,7 +76,7 @@ require_once 'inc/conn.php';
         </div>
     </nav>
 
-    <div class="container">
+    <div class="">
         <?php
 
         $sql = "SELECT * FROM `trip_status` ORDER BY s_no ASC";
@@ -98,14 +98,23 @@ require_once 'inc/conn.php';
             while ($row = mysqli_fetch_assoc( $result )) {
                 echo '
                     <tr>
-                        <td>' . $row['coach_no'] . '</td>
-                        <td>' . $row['time'] . '</td>
-                        <td>' . $row['route'] . '</td>
-                        <td>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="' . $row['id'] . '">
-                                Book
-                            </button>
-                        </td>
+                        <td class="text-success fw-bold">' . $row['coach_no'] . '</td>
+                        <td class="text-success fw-bold">' . $row['time'] . '</td>
+                        <td class="text-success fw-bold">' . $row['route'] . '</td>
+                        <td>';
+
+                if ($row['status'] == 1) {
+                    echo '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="' . $row['id'] . '">
+                            Book
+                        </button>';
+                }
+                else {
+                    echo '<button type="button" class="btn btn-danger" disabled>
+                            Book
+                        </button>';
+                }
+
+                echo '</td>
                     </tr>';
             }
             echo '</tbody></table>';
@@ -124,7 +133,7 @@ require_once 'inc/conn.php';
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content" id="modal-content">
 
-                
+
 
             </div>
         </div>

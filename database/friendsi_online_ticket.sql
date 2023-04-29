@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2023 at 06:28 PM
+-- Generation Time: Apr 29, 2023 at 10:41 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -67,9 +67,12 @@ CREATE TABLE `sell_ticket_history` (
 --
 
 INSERT INTO `sell_ticket_history` (`s_no`, `ticket_id`, `coach_no`, `coach_id`, `route`, `date`, `time`, `seat`, `station`, `mobile`, `name`, `gender`, `insert_date_time`) VALUES
-(1, '644bed527adb3', '106', '10000', 'Dhaka - Gopalganj - Khulna', '28-04-2023', '06:00 AM', 'B1', 'Gopalgonj - 500', '01747503257', 'MR. Mafuz', 'Male', '2023-04-28 21:59:14.503336'),
-(3, '644bedf0ca1fa', '106', '10000', 'Dhaka - Gopalganj - Khulna', '28-04-2023', '06:00 AM', 'B2', ' Fakirhat - 600', '01621833839', 'MR. Suvo', 'Male', '2023-04-28 22:01:52.827957'),
-(4, '644bee562ff29', '106', '10000', 'Dhaka - Gopalganj - Khulna', '28-04-2023', '06:00 AM', 'C1', 'Gopalgonj - 500', '01751944774', 'MR. Titu Mir', 'Male', '2023-04-28 22:03:34.196525');
+(1, '644cd29143261', '101', '68486', 'Dhaka - Gopalganj - Khulna', '2023-04-29', '06:30 AM', 'A1', 'Gopalgonj - 500', '01747503257', 'MR. Mafuz Alam', 'Male', '2023-04-29 14:17:21.275203'),
+(2, '644cd354883cf', '310', '55884', 'Dhaka - Gopalganj - Kotalipara', '2023-04-29', '09:30 AM', 'A3', ' Kotalipara - 600', '01751944774', 'MR. Titumir', 'Male', '2023-04-29 14:20:36.558167'),
+(3, '644cd371f1931', '310', '55884', 'Dhaka - Gopalganj - Kotalipara', '2023-04-29', '09:30 AM', 'A4', 'Gopalgonj - 500', '01918851337', 'MR. Titumir', 'Male', '2023-04-29 14:21:05.989632'),
+(4, '644cd38a49823', '310', '55884', 'Dhaka - Gopalganj - Kotalipara', '2023-04-29', '09:30 AM', 'B4', 'Gopalgonj - 500', '01718298564', 'MR. Titumir', 'Male', '2023-04-29 14:21:30.301127'),
+(5, '644cd4223e7c4', '410', '57083', 'Dhaka - Vatiyapara - Narail', '2023-04-29', '09:00 AM', 'A3', 'Vatiyapara - 450', '01621833839', 'MR. Suvo', 'Male', '2023-04-29 14:24:02.256017'),
+(6, '644cd43715d94', '410', '57083', 'Dhaka - Vatiyapara - Narail', '2023-04-29', '09:00 AM', 'B4', ' Narail - 550', '01747503257', 'MR. Mafuz Alam', 'Female', '2023-04-29 14:24:23.089556');
 
 -- --------------------------------------------------------
 
@@ -81,24 +84,25 @@ CREATE TABLE `trip_status` (
   `s_no` int(255) NOT NULL,
   `id` varchar(255) NOT NULL,
   `coach_no` varchar(60) NOT NULL,
+  `status` int(1) NOT NULL DEFAULT 1,
   `date` varchar(60) NOT NULL,
   `time` varchar(60) NOT NULL,
   `route` varchar(255) NOT NULL,
   `station` text NOT NULL,
-  `a1` int(1) NOT NULL DEFAULT 0,
-  `a2` int(1) NOT NULL DEFAULT 0,
-  `a3` int(1) NOT NULL DEFAULT 0,
-  `a4` int(1) NOT NULL DEFAULT 0,
-  `b1` int(1) NOT NULL DEFAULT 0,
-  `b2` int(1) NOT NULL DEFAULT 0,
-  `b3` int(1) NOT NULL DEFAULT 0,
-  `b4` int(1) NOT NULL DEFAULT 0,
-  `c1` int(1) NOT NULL DEFAULT 0,
-  `c2` int(1) NOT NULL DEFAULT 0,
-  `c3` int(1) NOT NULL DEFAULT 0,
-  `c4` int(1) NOT NULL DEFAULT 0,
-  `d1` int(1) NOT NULL DEFAULT 0,
-  `d2` int(1) NOT NULL DEFAULT 0,
+  `A1` int(1) NOT NULL DEFAULT 0,
+  `A2` int(1) NOT NULL DEFAULT 0,
+  `A3` int(1) NOT NULL DEFAULT 0,
+  `A4` int(1) NOT NULL DEFAULT 0,
+  `B1` int(1) NOT NULL DEFAULT 0,
+  `B2` int(1) NOT NULL DEFAULT 0,
+  `B3` int(1) NOT NULL DEFAULT 0,
+  `B4` int(1) NOT NULL DEFAULT 0,
+  `C1` int(1) NOT NULL DEFAULT 0,
+  `C2` int(1) NOT NULL DEFAULT 0,
+  `C3` int(1) NOT NULL DEFAULT 0,
+  `C4` int(1) NOT NULL DEFAULT 0,
+  `D1` int(1) NOT NULL DEFAULT 0,
+  `D2` int(1) NOT NULL DEFAULT 0,
   `d3` int(1) NOT NULL DEFAULT 0,
   `d4` int(1) NOT NULL DEFAULT 0,
   `e1` int(1) NOT NULL DEFAULT 0,
@@ -132,10 +136,15 @@ CREATE TABLE `trip_status` (
 -- Dumping data for table `trip_status`
 --
 
-INSERT INTO `trip_status` (`s_no`, `id`, `coach_no`, `date`, `time`, `route`, `station`, `a1`, `a2`, `a3`, `a4`, `b1`, `b2`, `b3`, `b4`, `c1`, `c2`, `c3`, `c4`, `d1`, `d2`, `d3`, `d4`, `e1`, `e2`, `e3`, `e4`, `f1`, `f2`, `f3`, `f4`, `g1`, `g2`, `g3`, `g4`, `h1`, `h2`, `h3`, `h4`, `i1`, `i2`, `i3`, `i4`, `j1`, `j2`, `j3`, `j4`, `j5`) VALUES
-(1, '10000', '106', '28-04-2023', '06:00 AM', 'Dhaka - Gopalganj - Khulna', 'Gopalgonj - 500, Fakirhat - 600, Khulna - 700', 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(2, '100001', '110', '28-04-2023', '09:00 AM', 'Dhaka - Gopalganj - Pirojpur', 'Gopalgonj - 500, Bagerhat - 600, Pirojpur - 700', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(3, '100009', '205', '28-04-2023', '09:00 PM', 'Dhaka - Gopalgonj - Kotalipara', 'Muksudpur - 450, Gopalgonj - 500, Kotalipara - 550', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+INSERT INTO `trip_status` (`s_no`, `id`, `coach_no`, `status`, `date`, `time`, `route`, `station`, `A1`, `A2`, `A3`, `A4`, `B1`, `B2`, `B3`, `B4`, `C1`, `C2`, `C3`, `C4`, `D1`, `D2`, `d3`, `d4`, `e1`, `e2`, `e3`, `e4`, `f1`, `f2`, `f3`, `f4`, `g1`, `g2`, `g3`, `g4`, `h1`, `h2`, `h3`, `h4`, `i1`, `i2`, `i3`, `i4`, `j1`, `j2`, `j3`, `j4`, `j5`) VALUES
+(1, '10000', '106', 0, '28-04-2023', '06:00 AM', 'Dhaka - Gopalganj - Khulna', 'Gopalgonj - 500, Fakirhat - 600, Khulna - 700', 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(2, '100001', '110', 0, '28-04-2023', '09:00 AM', 'Dhaka - Gopalganj - Pirojpur', 'Gopalgonj - 500, Bagerhat - 600, Pirojpur - 700', 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(3, '100009', '205', 0, '28-04-2023', '09:00 PM', 'Dhaka - Gopalgonj - Kotalipara', 'Muksudpur - 450, Gopalgonj - 500, Kotalipara - 550', 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(4, '32339', '101', 0, '2023-04-29', '06:30 AM', 'Dhaka - Gopalganj - Khulna', 'Gopalgonj - 500, Fakirhat - 600, Khulna -700', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(5, '68486', '101', 1, '2023-04-29', '06:30 AM', 'Dhaka - Gopalganj - Khulna', 'Gopalgonj - 500, Fakirhat - 600, Khulna -700', 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(6, '20054', '210', 1, '2023-04-29', '07:30 AM', 'Dhaka - Gopalganj - Pirojpur', 'Gopalgonj - 500, Nazirpur - 600, Pirojpur -700', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(7, '55884', '310', 1, '2023-04-29', '09:30 AM', 'Dhaka - Gopalganj - Kotalipara', 'Gopalgonj - 500, Kotalipara - 600', 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(8, '57083', '410', 1, '2023-04-29', '09:00 AM', 'Dhaka - Vatiyapara - Narail', 'Vatiyapara - 450, Narail - 550', 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -173,13 +182,13 @@ ALTER TABLE `my_table`
 -- AUTO_INCREMENT for table `sell_ticket_history`
 --
 ALTER TABLE `sell_ticket_history`
-  MODIFY `s_no` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `s_no` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `trip_status`
 --
 ALTER TABLE `trip_status`
-  MODIFY `s_no` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `s_no` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

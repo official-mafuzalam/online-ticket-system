@@ -30,9 +30,12 @@ $result_sell_ticket = mysqli_query( $con, $sql_sell_ticket );
 
 
 if ($result_sell_ticket) {
-    echo "<script>alert('Successfully sold $seat');
-        window.location.href = 'index.php';
-        </script>";
+    echo '<script>
+        window.open("ticket_print.php?id=' . $ticket_id . '", "_blank");
+        window.location.href = "index.php";
+    </script>';
+
+
 }
 
 
