@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         }
 
         caption>p {
-            margin: 2px 3px;
+            margin: 5px 5px;
             padding: 0;
         }
 
@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 </head>
 
 <body>
-    <table border="0" cellpadding="2" cellspacing="20">
+    <table border="0" cellpadding="2" cellspacing="25">
         <tbody>
             <tr class="noPrint">
                 <th width="219" style="width: 58mm;">Office-copy</th>

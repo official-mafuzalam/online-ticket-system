@@ -1,6 +1,8 @@
 <?php
-
+// Set the timezone to Bangladesh
+date_default_timezone_set( "Asia/Dhaka" );
 require_once 'inc/conn.php';
+
 
 
 
@@ -31,10 +33,10 @@ require_once 'inc/conn.php';
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <div class="container overflow-hidden text-center">
-                    <form class="row gx-2">
+                    <form class="row gx-2" action="" method="post">
                         <div class="col">
                             <div class="p-1">
-                                <select class="form-select mr-4" aria-label="Default select example">
+                                <select class="form-select mr-4" disabled aria-label="Default select example">
                                     <option selected>Station From</option>
                                     <option value="Dhaka">Dhaka</option>
                                     <option value="Gopalganj">Gopalganj</option>
@@ -46,7 +48,7 @@ require_once 'inc/conn.php';
                         </div>
                         <div class="col">
                             <div class="p-1">
-                                <select class="form-select mr-4" aria-label="Default select example">
+                                <select class="form-select mr-4" disabled aria-label="Default select example">
                                     <option selected>Station To</option>
                                     <option value="Dhaka">Dhaka</option>
                                     <option value="Gopalganj">Gopalganj</option>
@@ -58,7 +60,7 @@ require_once 'inc/conn.php';
                         </div>
                         <div class="col">
                             <div class="p-1">
-                                <input class="form-control" type="date" />
+                                <input class="form-control" name="date" type="date" />
                             </div>
                         </div>
                         <div class="col">
@@ -78,12 +80,21 @@ require_once 'inc/conn.php';
 
     <div class="">
         <?php
+        // Automatic Search Todays Trip
+        
+        // check if the form has been submitted
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $date = $_POST['date'];
+        }
+        else {
+            // Set the $date variable to the current date
+            $date = date( 'Y-m-d' );
+        }
 
-        $sql = "SELECT * FROM `trip_status` ORDER BY s_no ASC";
+        $sql = "SELECT * FROM `trip_status` WHERE date = '$date' ORDER BY s_no ASC";
         $result = mysqli_query( $con, $sql );
 
         if (mysqli_num_rows( $result ) > 0) {
-
             echo '
             <table class="table table-hover">
                 <thead>
@@ -94,8 +105,11 @@ require_once 'inc/conn.php';
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
-                <tbody>';
+            <tbody>';
+
             while ($row = mysqli_fetch_assoc( $result )) {
+                
+
                 echo '
                     <tr>
                         <td class="text-success fw-bold">' . $row['coach_no'] . '</td>
@@ -104,27 +118,23 @@ require_once 'inc/conn.php';
                         <td>';
 
                 if ($row['status'] == 1) {
-                    echo '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="' . $row['id'] . '">
-                            Book
-                        </button>';
+                    echo '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="' . $row['id'] . '">Book</button>';
                 }
                 else {
-                    echo '<button type="button" class="btn btn-danger" disabled>
-                            Book
-                        </button>';
+                    echo '<button type="button" class="btn btn-danger" disabled>Book</button>';
                 }
 
-                echo '</td>
-                    </tr>';
-            }
-            echo '</tbody></table>';
+                echo '</td></tr>';
 
+            }
+
+            echo '</tbody></table>';
         }
         else {
-            echo 'Data not found in the database';
+            echo '<p class="text-center fs-3">No Trip Found</p>';
         }
-
         ?>
+
     </div>
 
 

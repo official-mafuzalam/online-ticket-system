@@ -66,10 +66,10 @@ if (isset( $_POST['submit_trip'] )) {
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <div class="container overflow-hidden text-center">
-                    <form class="row gx-2">
+                    <form class="row gx-2" action="" method="post">
                         <div class="col">
                             <div class="p-1">
-                                <select class="form-select mr-4" aria-label="Default select example">
+                                <select class="form-select mr-4" disabled aria-label="Default select example">
                                     <option selected>Station From</option>
                                     <option value="Dhaka">Dhaka</option>
                                     <option value="Gopalganj">Gopalganj</option>
@@ -81,7 +81,7 @@ if (isset( $_POST['submit_trip'] )) {
                         </div>
                         <div class="col">
                             <div class="p-1">
-                                <select class="form-select mr-4" aria-label="Default select example">
+                                <select class="form-select mr-4" disabled aria-label="Default select example">
                                     <option selected>Station To</option>
                                     <option value="Dhaka">Dhaka</option>
                                     <option value="Gopalganj">Gopalganj</option>
@@ -93,7 +93,7 @@ if (isset( $_POST['submit_trip'] )) {
                         </div>
                         <div class="col">
                             <div class="p-1">
-                                <input class="form-control" type="date" />
+                                <input class="form-control" name="date" type="date" />
                             </div>
                         </div>
                         <div class="col">
@@ -121,29 +121,38 @@ if (isset( $_POST['submit_trip'] )) {
             </div>
         </div>
     </div>
+    <hr>
 
     <!-- All Trip Section -->
     <div class="">
         <?php
 
-        $sql = "SELECT * FROM `trip_status` ORDER BY s_no ASC";
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $date = $_POST['date'];
+        }
+        else {
+            // Set the $date variable to the current date
+            $date = date( 'Y-m-d' );
+        }
+
+        $sql = "SELECT * FROM `trip_status` WHERE date = '$date' ORDER BY s_no ASC";
         $result = mysqli_query( $con, $sql );
 
         if (mysqli_num_rows( $result ) > 0) {
 
             echo '
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">Coach</th>
-                        <th scope="col">Time</th>
-                        <th scope="col">Route</th>
-                        <th scope="col">Action</th>
-                        <th scope="col">Action</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-            <tbody>';
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Coach</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Route</th>
+                            <th scope="col">Action</th>
+                            <th scope="col">Action</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                <tbody>';
             while ($row = mysqli_fetch_assoc( $result )) {
                 echo '
                     <tr>
@@ -154,13 +163,13 @@ if (isset( $_POST['submit_trip'] )) {
 
                 if ($row['status'] == 1) {
                     echo '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="' . $row['id'] . '">
-                                Book
-                            </button>';
+                            Book
+                        </button>';
                 }
                 else {
                     echo '<button type="button" class="btn btn-danger" disabled>
-                                    Book
-                                </button>';
+                            Book
+                        </button>';
                 }
 
                 echo '</td>
@@ -170,18 +179,18 @@ if (isset( $_POST['submit_trip'] )) {
                             </button>
                         </td>';
                 echo '<td>
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#tripActive" data-id="' . $row['id'] . '">
-                                Active
-                            </button>
-                        </td>
-                    </tr>';
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#tripActive" data-id="' . $row['id'] . '">
+                            Active
+                        </button>
+                    </td>
+                </tr>';
             }
 
             echo '</tbody></table>';
 
         }
         else {
-            echo 'Data not found in the database';
+            echo '<p class="text-center fs-3">No Trip Found</p>';
         }
 
         ?>

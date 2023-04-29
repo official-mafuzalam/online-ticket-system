@@ -246,8 +246,9 @@ if (mysqli_num_rows( $result ) > 0) {
                         <div class="row g-2 seat">
                             <div class="col-md">
                                 <div class="form-floating">
-                                    <input type="tel" class="form-control" id="mobile" name="mobile"
-                                        placeholder="01751944774" maxlength="11" autocomplete="cc-number" required>
+                                <input type="tel" class="form-control" id="mobile" name="mobile"
+                                    placeholder="01751944774" maxlength="11" autocomplete="cc-number" required
+                                    onkeyup="getName(this.value)">                            
                                     <label for="mobile">Mobile Number</label>
                                 </div>
                             </div>
@@ -322,6 +323,20 @@ mysqli_close( $con );
             updateSelectedItems();
         });
     });
+
+
+    function getName(mobile) {
+        // Send an AJAX request to the server
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                // Update the name input field with the retrieved name
+                document.getElementById("name").value = this.responseText;
+            }
+        };
+        xhttp.open("GET", "get_name.php?mobile=" + mobile, true);
+        xhttp.send();
+    }
 
 
 
