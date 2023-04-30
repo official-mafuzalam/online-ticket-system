@@ -2,16 +2,15 @@
     width: 50px;
 }
 
-.seat{
+.seat {
     /* margin-bottom: 10px; */
     padding: 5px;
 }
 
-.gap{
+.gap {
     margin-right: 50px;
 }
 
-input[type=checkbox]:checked:not([disabled]) + label {
+input[type=checkbox]:checked:not([disabled])+label {
     background-color: red;
-  }
-  
+}

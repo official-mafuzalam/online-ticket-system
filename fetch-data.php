@@ -19,8 +19,17 @@ if (mysqli_num_rows( $result ) > 0) {
     // build the options HTML
     $options = "";
     foreach ($values_array as $value) {
-        $options .= "<option value='" . $value . "'>" . $value . "</option>";
+        $values = explode( "-", $value ); // split the station name and fare value
+        $station_name = trim( $values[0] ); // get the station name
+        $fare_value = trim( $values[1] ); // get the fare value
+        $options .= "<option fare='" . $fare_value . "' value='" . $station_name . " - " . $fare_value ."'>" . $station_name . " - " . $fare_value . "</option>";
     }
+
+    // To add a new fare-value, simply modify the $station variable and separate the station name and fare value with a dash ("-") followed by a space
+    // For example: $station = "Nazirpur - 600, Pirojpur -700, New Station - 800";
+
+    // Then, run the same code above to update the options HTML with the new fare-value.
+
 
     // display the coach_no, time, and route data in the modal
     echo '<div class="modal-header">
@@ -210,7 +219,6 @@ if (mysqli_num_rows( $result ) > 0) {
 
                             <input type="checkbox" class="btn-check" id="' . $row['coach_no'] . 'J4" autocomplete="on" ' . ( $row['j4'] == 1 ? 'checked disabled' : '' ) . '>
                             <label class="btn btn-outline-primary" for="' . $row['coach_no'] . 'J4">J4</label>
-
                         </div>
                     </div>
                         
@@ -218,10 +226,18 @@ if (mysqli_num_rows( $result ) > 0) {
                 </div>
                 <div class="col seat">
                     <form action="sell_ticket.php" method="post">
-                        <h5>
+                        <div class="row g-2 seat">
+                            <div class="col-md">
+                                <select class="form-select" id="station" name="station" required>
+                                    <option value="" selected disabled>Select Station</option>
+                                    ' . $options . '
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row g-2 seat">
                             <div id="selected-items"></div>
                             <br>
-                            <input id="seat-no-input" class="form-control" type="text" name="seat_no" required>
+                            <input id="seat-no-input" class="form-control" type="text" name="seat_no" readonly>
                             
                             <input type="hidden" name="s_no" value="' . $row['s_no'] . '">
                             <input type="hidden" name="id" value="' . $row['id'] . '">
@@ -230,16 +246,24 @@ if (mysqli_num_rows( $result ) > 0) {
                             <input type="hidden" name="time" value="' . $row['time'] . '">
                             <input type="hidden" name="route" value="' . $row['route'] . '">
 
-                        </h5>
-                        <br>
+                        </div>
                         <div class="row g-2 seat">
                             <div class="col-md">
                                 <div class="form-floating">
-                                    <select class="form-select" id="station" name="station" required>
-                                        <option value="" selected disabled>Select Station</option>
-                                        ' . $options . '
-                                    </select>
-                                    <label for="station">Station</label>
+                                    <input id="fare-input" class="form-control" type="number" name="fare" onchange="updateTotalFare()" readonly >
+                                    <label for="mobile">Seat Fare</label>
+                                </div>
+                            </div>
+                            <div class="col-md">
+                                <div class="form-floating">
+                                    <input id="num-seat-input" class="form-control" type="number" name="num_seat" readonly >
+                                    <label for="mobile">Total Seat</label>
+                                </div>
+                            </div>
+                            <div class="col-md">
+                                <div class="form-floating">
+                                    <input id="total-fare" class="form-control" type="number" name="total_fare" readonly >
+                                    <label for="mobile">Total Fare</label>
                                 </div>
                             </div>
                         </div>
@@ -262,16 +286,14 @@ if (mysqli_num_rows( $result ) > 0) {
                         </div>
                         <div class="row g-2 seat">
                             <div class="col-md">
-                                <div class="form-floating">
-                                    <select class="form-select" id="gender" name="gender" required>
-                                        <option selected disabled>Select Gender</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                    </select>
-                                    <label for="gender">Gender</label>
-                                </div>
+                                <select class="form-select" id="gender" name="gender" required>
+                                    <option selected disabled>Select Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
                             </div>
                         </div>
+                        
                         <input type="submit" class="btn btn-info" value="Confirm">
                     </form>
                 </div>
@@ -325,6 +347,7 @@ mysqli_close( $con );
     });
 
 
+    // JS For Find Name by Mobile Number
     function getName(mobile) {
         // Send an AJAX request to the server
         var xhttp = new XMLHttpRequest();
@@ -340,5 +363,55 @@ mysqli_close( $con );
 
 
 
+
+</script>
+
+<!-- JS For Automatic Fare by Station -->
+<script>
+    // add event listener to station select element
+    var stationSelect = document.getElementById("station");
+    stationSelect.addEventListener("change", function () {
+        // get selected option
+        var selectedOption = this.options[this.selectedIndex];
+        // get fare value from selected option
+        var fareValue = selectedOption.getAttribute("fare");
+        // set fare input value to fare value
+        var fareInput = document.getElementById("fare-input");
+        fareInput.value = fareValue;
+    });
+</script>
+
+
+<!-- JS For Selected Seat Number -->
+<script>
+    function updateNumSeats() {
+        // get all checkboxes with class "btn-check"
+        var checkboxes = document.querySelectorAll('.btn-check:not(:disabled)');
+        var numChecked = 0;
+        // loop through checkboxes to count number of checked checkboxes
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                numChecked++;
+            }
+        }
+        // set num seats input value
+        var numSeatInput = document.getElementById("num-seat-input");
+        numSeatInput.value = numChecked;
+
+        var fareInput = document.getElementById("fare-input").value;
+
+        var totalFare = numChecked * fareInput;
+
+        var totalFareInput = document.getElementById("total-fare");
+        totalFareInput.value = totalFare;
+
+
+    }
+
+    // add event listeners to checkboxes
+    var checkboxes = document.querySelectorAll('.btn-check:not(:disabled)');
+    for (var i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].addEventListener('change', updateNumSeats);
+    }
 
 </script>

@@ -11,6 +11,8 @@ $date = $_POST['date'];
 $time = $_POST['time'];
 
 $seat = $_POST['seat_no'];
+$fare = $_POST['fare'];
+$total_fare = $_POST['total_fare'];
 $station = $_POST['station'];
 $mobile = $_POST['mobile'];
 $name = $_POST['name'];
@@ -33,8 +35,8 @@ $ticket_id = uniqid();
 $seats = explode( ",", $_POST['seat_no'] ); // split the input by comma to get an array of seat numbers
 $seat_list = implode( ", ", $seats ); // create a comma-separated list of seats (e.g. "B3, B4, C4")
 
-$sql_sell_ticket = "INSERT INTO sell_ticket_history (`ticket_id`, `coach_no`, `coach_id`, `route`, `date`, `time`, `seat`, `station`, `mobile`, `name`, `gender`) 
-                    VALUES ('$ticket_id','$coach_no','$coach_id','$route','$date','$time','$seat_list','$station','$mobile','$name','$gender')";
+$sql_sell_ticket = "INSERT INTO sell_ticket_history (`ticket_id`, `coach_no`, `coach_id`, `route`, `date`, `time`, `seat`, `fare`, `total_fare`, `station`, `mobile`, `name`, `gender`) 
+                    VALUES ('$ticket_id','$coach_no','$coach_id','$route','$date','$time','$seat_list','$fare', '$total_fare', '$station','$mobile','$name','$gender')";
 
 $result_sell_ticket = mysqli_query( $con, $sql_sell_ticket );
 

@@ -126,9 +126,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                             <td colspan="3" style="font-weight:bold; font-size:12px"><?php echo $row['station']; ?>
                             </td>
                         </tr>
-                        <!-- <tr>
-                            <td colspan="4">Ticket Price: 400.00 Quantity: 1</td>
-                        </tr> -->
+                        <tr>
+                            <td colspan="4">Ticket Price: <?php echo $row['fare']; ?></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">Total Fare: <?php echo $row['total_fare']; ?></td>
+                        </tr>
                         <tr>
                             <td colspan="4">Seat No:
                                 <?php echo implode( ", ", preg_split( '/(?<=\d)(?=[a-z])/i', $row['seat'] ) ); ?>
@@ -181,12 +184,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                 <?php echo implode( ", ", preg_split( '/(?<=\d)(?=[a-z])/i', $row['seat'] ) ); ?>
                             </td>
                         </tr>
-                        <!-- <tr>
-                            <td colspan="4">Ticket Price: 400.00 Quantity: 1 Goods fare: 0.00</td>
-                        </tr> -->
-                        <!-- <tr>
-                            <th colspan="4" align="center">Total Fare: 400.00</th>
-                        </tr> -->
+                        <tr>
+                            <td colspan="4" nowrap>Ticket Price: <?php echo $row['fare']; ?></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" nowrap>Total Fare: <?php echo $row['total_fare']; ?></td>
+                        </tr>
                         <tr>
                             <td></td>
                             <td></td>
@@ -239,18 +242,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                             <td colspan="3" style="font-weight:bold; font-size:12px"><?php echo $row['station']; ?>
                             </td>
                         </tr>
-                        <!-- <tr>
+                        <tr>
                             <td nowrap>&nbsp;</td>
-                            <td colspan="4" nowrap>Ticket Price: 400.00 Quantity: 1</td>
+                            <td colspan="4" nowrap>Ticket Price: <?php echo $row['fare']; ?></td>
                         </tr>
                         <tr>
                             <td nowrap>&nbsp;</td>
-                            <td colspan="4" nowrap>Goods fare: 0.00</td>
+                            <td colspan="4" nowrap>Total Fare: <?php echo $row['total_fare']; ?></td>
                         </tr>
-                        <tr>
-                            <td nowrap>&nbsp;</td>
-                            <td colspan="4" nowrap>Total Fare: 400.00</td>
-                        </tr> -->
                         <tr>
                             <td>&nbsp;</td>
                             <td colspan="4">Seat No:
