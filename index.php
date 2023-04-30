@@ -26,7 +26,8 @@ require_once 'inc/conn.php';
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand p-1" href="#">Friends Travels</a>
+            <!-- <a class="navbar-brand p-1" href="#">Friends Travels</a> -->
+            <p class="navbar-brand p-1">Friends Travels</p>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -65,7 +66,7 @@ require_once 'inc/conn.php';
                         </div>
                         <div class="col">
                             <div class="p-1">
-                                <button type="submit" class="btn btn-info">Search</button>
+                                <button type="submit" class="btn btn-outline-success">Search</button>
                             </div>
                         </div>
                     </form>
@@ -77,6 +78,19 @@ require_once 'inc/conn.php';
 
         </div>
     </nav>
+
+    <!-- Trip Action Section -->
+    <div class="">
+        <div class="row">
+            <div class="col">
+                <div class="p-1">
+                    <a href="search_tickets.php" class="btn btn-success">Search Ticket</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <hr>
 
     <div class="">
         <?php
@@ -91,12 +105,14 @@ require_once 'inc/conn.php';
             $date = date( 'Y-m-d' );
         }
 
-        $sql = "SELECT * FROM `trip_status` WHERE date = '$date' ORDER BY s_no ASC";
+        // $sql = "SELECT * FROM `trip_status` WHERE date = '$date' ORDER BY time ASC";
+        $sql = "SELECT * FROM `trip_status` WHERE date = '$date' ORDER BY STR_TO_DATE(time, '%h:%i %p')";
+
         $result = mysqli_query( $con, $sql );
 
         if (mysqli_num_rows( $result ) > 0) {
             echo '
-            <table class="table table-hover">
+            <table class="table table-hover text-center">
                 <thead>
                     <tr>
                         <th scope="col">Coach</th>
@@ -108,7 +124,7 @@ require_once 'inc/conn.php';
             <tbody>';
 
             while ($row = mysqli_fetch_assoc( $result )) {
-                
+
 
                 echo '
                     <tr>
@@ -151,7 +167,10 @@ require_once 'inc/conn.php';
 
 
 
+
     <script>
+
+        // JS For Open Seat Plane
         $(document).ready(function () {
             $('#exampleModal').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget);
@@ -168,6 +187,7 @@ require_once 'inc/conn.php';
                 });
             });
         });
+
 
     </script>
 
@@ -194,6 +214,7 @@ require_once 'inc/conn.php';
             });
         });
     </script> -->
+
 
 
 

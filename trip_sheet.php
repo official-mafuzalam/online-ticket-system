@@ -1,4 +1,6 @@
 <?php
+// Set the timezone to Bangladesh
+date_default_timezone_set( "Asia/Dhaka" );
 // Establish a database connection
 require_once 'inc/conn.php';
 
@@ -67,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 <div>
                     <p>Supervisor: <span class="fw-bold">MR. X</span></p>
                     <p>Driver: <span class="fw-bold">Mr. Y</span></p>
-                    <p>Reg.No: <span class="fw-bold">NON_AC</span></p>
+                    <p>Reg.No: <span class="fw-bold"><?php echo $row['time']; ?></span></p>
                 </div>
                 <div>
                     <p>Coach: <span class="fw-bold"><?php echo $row['coach_no']; ?></span></p>
@@ -91,7 +93,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 <tbody>
                     <?php
                     // Get the coach status for the given ID
-                    $coachStatusQuery = "SELECT * FROM trip_status WHERE id = ? AND (A1 = 1 OR A2 = 1 OR A3 = 1 OR A4 = 1)";
+                    $coachStatusQuery = "SELECT * FROM trip_status WHERE id = ? AND (A1 = 1 OR A2 = 1 OR A3 = 1 OR A4 = 1 OR B1 = 1 OR B2 = 1 OR B3 = 1 OR B4 = 1 OR C1 = 1 OR C2 = 1 OR C3 = 1 OR C4 = 1 OR D1 = 1 OR D2 = 1 OR D3 = 1 OR D4 = 1 OR E1 = 1 OR E2 = 1 OR E3 = 1 OR E4 = 1 OR F1 = 1 OR F2 = 1 OR F3 = 1 OR F4 = 1 OR G1 = 1 OR G2 = 1 OR G3 = 1 OR G4 = 1 OR H1 = 1 OR H2 = 1 OR H3 = 1 OR H4 = 1 OR I1 = 1 OR I2 = 1 OR I3 = 1 OR I4 = 1 OR J1 = 1 OR J2 = 1 OR J3 = 1 OR J4 = 1 OR J5 = 1)";
+
                     $coachStatusStmt = $con->prepare( $coachStatusQuery );
                     $coachStatusStmt->bind_param( "i", $coach_id );
                     $coachStatusStmt->execute();
@@ -109,25 +112,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
                     // Loop through each column and get the ticket information for the given seat
                     foreach ($columns as $column) {
-                        $ticketQuery = "SELECT ticket_id, name, mobile, gender, station, seat FROM sell_ticket_history WHERE coach_id = ? AND seat = ?";
-                        $ticketStmt = $con->prepare( $ticketQuery );
-                        $ticketStmt->bind_param( "is", $coach_id, $column );
-                        $ticketStmt->execute();
-                        $ticketResult = $ticketStmt->get_result();
+                        $seats = explode( ",", $column ); // split the seat string into an array
+                        foreach ($seats as $seat) {
+                            $ticketQuery = "SELECT ticket_id, name, mobile, gender, station, seat FROM sell_ticket_history WHERE coach_id = ? AND seat LIKE ?";
+                            $ticketStmt = $con->prepare( $ticketQuery );
+                            $seatParam = '%' . $seat . '%'; // create variable to hold third argument
+                            $ticketStmt->bind_param( "is", $coach_id, $seatParam ); // pass variable by reference
+                            $ticketStmt->execute();
+                            $ticketResult = $ticketStmt->get_result();
 
-                        // Loop through each row and echo the ticket information
-                        while ($ticketRow = $ticketResult->fetch_assoc()) {
-                            echo "<tr>";
-                            echo "<td class='font-weight-normal'>" . $ticketRow['seat'] . "</td>";
-                            echo "<td class='font-weight-normal'>" . $ticketRow['ticket_id'] . "</td>";
-                            echo "<td class='font-weight-normal'>" . $ticketRow['name'] . "</td>";
-                            echo "<td class='font-weight-normal'>" . $ticketRow['mobile'] . "</td>";
-                            echo "<td class='font-weight-normal'>" . $ticketRow['gender'] . "</td>";
-                            echo "<td class='font-weight-normal'>" . $ticketRow['station'] . "</td>";
-                            echo "</tr>";
+                            // Loop through each row and echo the ticket information
+                            while ($ticketRow = $ticketResult->fetch_assoc()) {
+                                $seats = explode( " ", $ticketRow['seat'] ); // split the seat string into an array
+                                foreach ($seats as $s) {
+                                    echo "<tr>";
+                                    echo "<td class='font-weight-normal'>" . $s . "</td>";
+                                    echo "<td class='font-weight-normal'>" . $ticketRow['ticket_id'] . "</td>";
+                                    echo "<td class='font-weight-normal'>" . $ticketRow['name'] . "</td>";
+                                    echo "<td class='font-weight-normal'>" . $ticketRow['mobile'] . "</td>";
+                                    echo "<td class='font-weight-normal'>" . $ticketRow['gender'] . "</td>";
+                                    echo "<td class='font-weight-normal'>" . $ticketRow['station'] . "</td>";
+                                    echo "</tr>";
+                                }
+                            }
+
                         }
-
                     }
+
+
                     ?>
                 </tbody>
 

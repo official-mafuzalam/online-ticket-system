@@ -10,3 +10,8 @@
 .gap{
     margin-right: 50px;
 }
+
+input[type=checkbox]:checked:not([disabled]) + label {
+    background-color: red;
+  }
+  

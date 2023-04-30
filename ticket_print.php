@@ -130,7 +130,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                             <td colspan="4">Ticket Price: 400.00 Quantity: 1</td>
                         </tr> -->
                         <tr>
-                            <td colspan="4">Seat No: <?php echo $row['seat']; ?></td>
+                            <td colspan="4">Seat No:
+                                <?php echo implode( ", ", preg_split( '/(?<=\d)(?=[a-z])/i', $row['seat'] ) ); ?>
+                            </td>
                         </tr>
                         <tr>
                             <td align="right" colspan="4"><u>Sold By: Mafuz</u><br><i>Hemayetpur, Dhaka</i></td>
@@ -175,7 +177,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                             <td colspan="4">Departure Place: Hemayetpur, Dhaka</td>
                         </tr>
                         <tr>
-                            <td colspan="4">Seat No: <?php echo $row['seat']; ?></td>
+                            <td colspan="4">Seat No:
+                                <?php echo implode( ", ", preg_split( '/(?<=\d)(?=[a-z])/i', $row['seat'] ) ); ?>
+                            </td>
                         </tr>
                         <!-- <tr>
                             <td colspan="4">Ticket Price: 400.00 Quantity: 1 Goods fare: 0.00</td>
@@ -249,7 +253,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         </tr> -->
                         <tr>
                             <td>&nbsp;</td>
-                            <td colspan="4">Seat No: <?php echo $row['seat']; ?></td>
+                            <td colspan="4">Seat No:
+                                <?php echo implode( ", ", preg_split( '/(?<=\d)(?=[a-z])/i', $row['seat'] ) ); ?>
+                            </td>
                         </tr>
 
                         <tr>
