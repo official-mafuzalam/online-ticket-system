@@ -1,11 +1,7 @@
 <?php
 // Set the timezone to Bangladesh
 date_default_timezone_set( "Asia/Dhaka" );
-require_once 'inc/conn.php';
-
-// Check if the search button is clicked
-
-
+require_once '../inc/conn.php';
 
 ?>
 

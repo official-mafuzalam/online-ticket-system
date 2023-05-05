@@ -1,6 +1,6 @@
 <?php
 // Establish a database connection
-require_once 'inc/conn.php';
+require_once '../inc/conn.php';
 
 // Retrieve the mobile number from the GET request parameter
 $mobile = $_GET['mobile'];

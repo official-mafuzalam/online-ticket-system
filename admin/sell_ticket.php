@@ -1,6 +1,6 @@
 <?php
 
-require_once 'inc/conn.php';
+require_once '../inc/conn.php';
 
 
 $coach_no = $_POST['coach_no'];

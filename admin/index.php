@@ -3,7 +3,7 @@
 // Set the timezone to Bangladesh
 date_default_timezone_set( "Asia/Dhaka" );
 
-require_once 'inc/conn.php';
+require_once '../inc/conn.php';
 
 
 if (isset( $_POST['submit_trip'] )) {
@@ -27,7 +27,7 @@ if (isset( $_POST['submit_trip'] )) {
 
     if ($result) {
         echo "<script>alert('Added a New Trip Successfully');
-        window.location.href = 'admin.php';
+        window.location.href = 'index.php';
         </script>";
     }
     else {
@@ -105,7 +105,7 @@ if (isset( $_POST['submit_trip'] )) {
                     </form>
                 </div>
                 <div class="d-flex">
-                    <a href="index.php">Agent</a>
+                    <a href="../agents/">Agent</a>
                 </div>
             </div>
 

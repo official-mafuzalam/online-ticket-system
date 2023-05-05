@@ -1,6 +1,6 @@
 <?php
 // Establish a database connection
-require_once 'inc/conn.php';
+require_once '../inc/conn.php';
 
 // Get the id number from the GET request
 $id = $_GET['id'];
@@ -22,7 +22,7 @@ if (mysqli_num_rows( $result ) > 0) {
         $values = explode( "-", $value ); // split the station name and fare value
         $station_name = trim( $values[0] ); // get the station name
         $fare_value = trim( $values[1] ); // get the fare value
-        $options .= "<option fare='" . $fare_value . "' value='" . $station_name . " - " . $fare_value ."'>" . $station_name . " - " . $fare_value . "</option>";
+        $options .= "<option fare='" . $fare_value . "' value='" . $station_name ."'>" . $station_name . " - " . $fare_value . "</option>";
     }
 
     // To add a new fare-value, simply modify the $station variable and separate the station name and fare value with a dash ("-") followed by a space

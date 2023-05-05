@@ -2,7 +2,7 @@
 // Set the timezone to Bangladesh
 date_default_timezone_set( "Asia/Dhaka" );
 // Establish a database connection
-require_once 'inc/conn.php';
+require_once '../inc/conn.php';
 
 // check if the form has been submitted
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -88,6 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         <th scope="col">Mobile</th>
                         <th scope="col">Gender</th>
                         <th scope="col">Station</th>
+                        <th scope="col">Fare</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -114,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     foreach ($columns as $column) {
                         $seats = explode( ",", $column ); // split the seat string into an array
                         foreach ($seats as $seat) {
-                            $ticketQuery = "SELECT ticket_id, name, mobile, gender, station, seat FROM sell_ticket_history WHERE coach_id = ? AND seat LIKE ?";
+                            $ticketQuery = "SELECT ticket_id, name, mobile, gender, station, seat, fare FROM sell_ticket_history WHERE coach_id = ? AND seat LIKE ?";
                             $ticketStmt = $con->prepare( $ticketQuery );
                             $seatParam = '%' . $seat . '%'; // create variable to hold third argument
                             $ticketStmt->bind_param( "is", $coach_id, $seatParam ); // pass variable by reference
@@ -132,6 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                     echo "<td class='font-weight-normal'>" . $ticketRow['mobile'] . "</td>";
                                     echo "<td class='font-weight-normal'>" . $ticketRow['gender'] . "</td>";
                                     echo "<td class='font-weight-normal'>" . $ticketRow['station'] . "</td>";
+                                    echo "<td class='font-weight-normal'>" . $ticketRow['fare'] . "</td>";
                                     echo "</tr>";
                                 }
                             }

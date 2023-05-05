@@ -1,6 +1,6 @@
 <?php
 // Establish a database connection
-require_once 'inc/conn.php';
+require_once '../inc/conn.php';
 
 // Get the id number from the GET request
 $id = $_GET['id'];
@@ -18,7 +18,7 @@ if (isset($_POST['submit_active'])) {
 
     if ($result) {
         echo "<script>alert('Trip Active Successfully');
-        window.location.href = 'admin.php';
+        window.location.href = 'index.php';
         </script>";
     } else {
         echo "Query error!";
