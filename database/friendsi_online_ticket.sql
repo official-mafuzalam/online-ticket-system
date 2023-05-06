@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2023 at 06:32 PM
+-- Generation Time: May 06, 2023 at 05:58 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -131,7 +131,24 @@ INSERT INTO `trip_status` (`s_no`, `id`, `coach_no`, `status`, `date`, `time`, `
 (7, '11798', '410', 1, '2023-05-01', '06:45 AM', 'Dhaka - Vatiyapara - Narail', 'Vatiyapara - 450, Narail - 550', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 (8, '16692', '470', 1, '2023-05-01', '09:45 PM', 'Dhaka - Vatiyapara - Narail', 'Vatiyapara - 450, Narail - 550', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 (9, '10456', '101', 1, '2023-05-05', '06:30 AM', 'Dhaka - Gopalganj - Khulna', 'Muksudpur - 450, Gopalgonj - 500, Fakirhat - 600, Khulna -700', 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1),
-(10, '24226', '101', 1, '2023-05-05', '06:30 AM', 'Dhaka - Gopalganj - Khulna', 'Muksudpur - 450, Gopalgonj - 500, Fakirhat - 550, Nawapara - 600, Khulna -700', 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+(10, '24226', '101', 1, '2023-05-05', '06:30 AM', 'Dhaka - Gopalganj - Khulna', 'Muksudpur - 450, Gopalgonj - 500, Fakirhat - 550, Nawapara - 600, Khulna -700', 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(11, '38467', '101', 1, '2023-05-06', '06:30 AM', 'Dhaka - Gopalganj - Khulna', 'Muksudpur - 450, Gopalgonj - 500, Fakirhat - 600, Khulna -700', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(12, '82486', '110', 1, '2023-05-06', '08:30 AM', 'Dhaka - Gopalganj - Khulna', 'Muksudpur - 450, Gopalgonj - 500, Fakirhat - 600, Khulna -700', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(13, '37821', '115', 1, '2023-05-06', '09:30 AM', 'Dhaka - Gopalganj - Khulna', 'Muksudpur - 450, Gopalgonj - 500, Fakirhat - 600, Khulna -700', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(14, '62970', '130', 1, '2023-05-06', '12:30 PM', 'Dhaka - Gopalganj - Khulna', 'Muksudpur - 450, Gopalgonj - 500, Fakirhat - 600, Khulna -700', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(15, '18059', '165', 1, '2023-05-06', '07:30 PM', 'Dhaka - Gopalganj - Khulna', 'Muksudpur - 450, Gopalgonj - 500, Fakirhat - 600, Khulna -700', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(16, '81332', '210', 1, '2023-05-06', '06:00 AM', 'Dhaka - Gopalganj - Pirojpur', 'Muksudpur - 450, Gopalgonj - 500, Patgati - 550, Nazirpur - 600, Pirojpur -700', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(17, '50446', '240', 1, '2023-05-06', '12:00 PM', 'Dhaka - Gopalganj - Pirojpur', 'Muksudpur - 450, Gopalgonj - 500, Patgati - 550, Nazirpur - 600, Pirojpur -700', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(18, '73749', '255', 1, '2023-05-06', '03:00 PM', 'Dhaka - Gopalganj - Pirojpur', 'Muksudpur - 450, Gopalgonj - 500, Patgati - 550, Nazirpur - 600, Pirojpur -700', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(19, '28944', '295', 1, '2023-05-06', '11:00 PM', 'Dhaka - Gopalganj - Pirojpur', 'Muksudpur - 450, Gopalgonj - 500, Patgati - 550, Nazirpur - 600, Pirojpur -700', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(20, '74215', '310', 1, '2023-05-06', '06:15 AM', 'Dhaka - Gopalganj - Kotalipara', 'Muksudpur - 450, Gopalgonj - 500, Kotalipara - 550', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(21, '15137', '340', 1, '2023-05-06', '12:15 PM', 'Dhaka - Gopalganj - Kotalipara', 'Muksudpur - 450, Gopalgonj - 500, Kotalipara - 550', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(22, '33532', '340', 1, '2023-05-06', '12:15 PM', 'Dhaka - Gopalganj - Kotalipara', 'Muksudpur - 450, Gopalgonj - 500, Kotalipara - 550', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(23, '58910', '370', 1, '2023-05-06', '06:15 PM', 'Dhaka - Gopalganj - Kotalipara', 'Muksudpur - 450, Gopalgonj - 500, Kotalipara - 550', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(24, '61867', '410', 1, '2023-05-06', '06:45 AM', 'Dhaka - Vatiyapara - Narail', 'Vatiyapara - 450, Narail - 550', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(25, '43413', '425', 1, '2023-05-06', '09:45 AM', 'Dhaka - Vatiyapara - Narail', 'Vatiyapara - 450, Narail - 550', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(26, '88294', '470', 1, '2023-05-06', '09:45 PM', 'Dhaka - Vatiyapara - Narail', 'Vatiyapara - 450, Narail - 550', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(27, '16570', '455', 1, '2023-05-06', '03:45 PM', 'Dhaka - Vatiyapara - Narail', 'Vatiyapara - 450, Narail - 550', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -154,7 +171,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `user_type`, `counter_name`, `user_name`, `mobile`, `password`) VALUES
 (1, 1, 'Hemayetpur', 'Mafuz Alam', '01747503257', 123456),
-(2, 3, 'Hemayetpur', 'MD Titu Mir', '01751944774', 123456);
+(2, 3, 'Hemayetpur', 'MD Titu Mir', '01751944774', 123456),
+(3, 3, 'Gabtoli', 'MR Sagor', '01918851337', 19188);
 
 --
 -- Indexes for dumped tables
@@ -192,13 +210,13 @@ ALTER TABLE `sell_ticket_history`
 -- AUTO_INCREMENT for table `trip_status`
 --
 ALTER TABLE `trip_status`
-  MODIFY `s_no` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `s_no` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

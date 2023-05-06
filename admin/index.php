@@ -5,6 +5,10 @@ date_default_timezone_set( "Asia/Dhaka" );
 
 require_once '../inc/conn.php';
 
+session_start();
+
+$user_name = $_SESSION['user_name'];
+
 
 if (isset( $_POST['submit_trip'] )) {
 
@@ -51,27 +55,30 @@ if (isset( $_POST['submit_trip'] )) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <!-- <a class="navbar-brand p-1" href="#">Friends Travels</a> -->
             <p class="navbar-brand p-1">Friends Travels</p>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav1"
+                aria-controls="navbarNav1" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <div class="container overflow-hidden text-center">
+                <div class="container overflow-hidden">
                     <form class="row gx-2" action="" method="post">
                         <div class="col">
                             <div class="p-1">
-                                <select class="form-select mr-4" disabled aria-label="Default select example">
-                                    <option selected>Station From</option>
+                                <select class="form-select mr-4" aria-label="Default select example">
+                                    <option selected>From</option>
                                     <option value="Dhaka">Dhaka</option>
                                     <option value="Gopalganj">Gopalganj</option>
                                     <option value="Khulna">Khulna</option>
@@ -82,8 +89,8 @@ if (isset( $_POST['submit_trip'] )) {
                         </div>
                         <div class="col">
                             <div class="p-1">
-                                <select class="form-select mr-4" disabled aria-label="Default select example">
-                                    <option selected>Station To</option>
+                                <select class="form-select mr-4" aria-label="Default select example">
+                                    <option selected>To</option>
                                     <option value="Dhaka">Dhaka</option>
                                     <option value="Gopalganj">Gopalganj</option>
                                     <option value="Khulna">Khulna</option>
@@ -94,7 +101,8 @@ if (isset( $_POST['submit_trip'] )) {
                         </div>
                         <div class="col">
                             <div class="p-1">
-                                <input class="form-control" name="date" type="date" />
+                                <input name="date" type="date" class="form-control"
+                                    value="<?php echo date( 'Y-m-d' ); ?>" required />
                             </div>
                         </div>
                         <div class="col">
@@ -103,29 +111,41 @@ if (isset( $_POST['submit_trip'] )) {
                             </div>
                         </div>
                     </form>
+                    <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                        data-bs-target="#tripAddModal">
+                        New Trip Add
+                    </button>
                 </div>
-                <div class="d-flex">
-                    <a href="../agents/">Agent</a>
+                <div class="d-flex flex-row-reverse">
+                    <div class="dropdown">
+                        <button class="btn btn-success dropdown-toggle" type="button" id="triggerId"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Welcome <?php echo $user_name ?>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="triggerId">
+                            <a class="dropdown-item" href="search_tickets.php">
+                                <i class="bi bi-ticket-detailed"></i>
+                                Search Ticket
+                            </a>
+                            <a class="dropdown-item" href="search_tickets.php">
+                                <i class="bi bi-card-list"></i>
+                                User Sell Report
+                            </a>
+                            <a class="dropdown-item" href="admin_features.php">
+                                <i class="bi bi-columns-gap"></i>
+                                Admin Features
+                            </a>
+                            <a class="dropdown-item" href="../logout.php">
+                                <i class="bi bi-box-arrow-right"></i>
+                                Log Out
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-
         </div>
     </nav>
 
-    <!-- Trip Action Section -->
-    <div class="">
-        <div class="row">
-            <div class="col">
-                <a href="search_tickets.php" class="btn btn-success">Search Ticket</a>
-            </div>
-            <div class="col">
-                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#tripAddModal">
-                    New Trip Add
-                </button>
-            </div>
-        </div>
-    </div>
-    <hr>
 
     <!-- All Trip Section -->
     <div class="">

@@ -32,11 +32,11 @@ if (isset($_POST['login']) && !empty($_POST['mobile']) && !empty($_POST['passwor
 
             if ($user['user_type'] == 1) {
 
-                header("Location: admin/index.php");
+                header("Location: admin/");
 
             } elseif ($user['user_type'] == 3) {
 
-                header("Location: agents/index.php");
+                header("Location: agents/");
 
             }
 

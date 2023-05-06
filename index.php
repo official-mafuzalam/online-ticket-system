@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['w_type'])) {
-    header("Location: login.php");
+if (!isset( $_SESSION['user_type'] )) {
+    header( "Location: login.php" );
 }
 
 // $pdo = new PDO('mysql:host=localhost;dbname=mydb', 'root', '');
@@ -13,19 +13,17 @@ if (!isset($_SESSION['w_type'])) {
 
 // $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if ($_SESSION['w_type'] == 1) {
+if ($user['user_type'] == 1) {
 
-    header("Location: users/administration.php");
+    header( "Location: admin/" );
 
-} elseif ($_SESSION['w_type'] == 3) {
+}
+elseif ($user['user_type'] == 3) {
 
-    header("Location: users/teacher.php");
+    header( "Location: agents/" );
 
-} elseif ($_SESSION['w_type'] == 4) {
-
-    header("Location: users/accountants.php");
-
-} else {
-    header("Location: logout.php");
+}
+else {
+    header( "Location: logout.php" );
 }
 ?>
